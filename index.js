@@ -1,5 +1,5 @@
 const inquirer = require('inquirer')
-
+const {seedDepartment} = require('./routes/api/departmentRoutes')
 
 const questions = [   
     {
@@ -20,4 +20,21 @@ const promptUser = () => {
     return inquirer.prompt(questions)
 }
 // takes in data from prompts 
-promptUser() 
+const initPrompt = async() => {
+ const answers= await promptUser() 
+
+    if(answers){
+        const {options}  = answers
+        switch (options) {
+            case 'departments':
+               
+                break;
+            default:
+                break;
+        }
+    }
+
+}
+
+initPrompt()
+
