@@ -1,8 +1,14 @@
 const Department = require('../../models/Department')
 
+
+
+
+
+
 // creates multiple departments
 const seedDepartment = async() => {
-    try{    
+    try{
+            
         const department = await Department.bulkCreate([
             {
                 title: 'Human Resources'
@@ -24,17 +30,30 @@ const seedDepartment = async() => {
         const extractedData = department.map(dept => ({
             id: dept.id,
             title: dept.title,
-          }));
-          console.log('\nExtracted Data:');
-          console.table(extractedData);
-     
+        }));
+        console.log('\nExtracted SEEDED Data:');
+        console.table(extractedData);
+        
     }catch(err){
         console.error(err)
     }
     
 }
 
-
+const getDepartments = async() => {
+    try{
+        const departmentData = await Department.findAll()
+            const extractedData = departmentData.map(dept => ({
+                id: dept.id,
+                title: dept.title,
+              }));
+              console.log('\nExtracted GET Data:');
+              console.table(extractedData);
+    }catch(err){
+        console.error(err)
+    }
+}
 module.exports = {
-    seedDepartment
+    seedDepartment,
+    getDepartments
 }
