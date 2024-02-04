@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
-const {seedDepartment, getDepartments} = require('./routes/api/departmentRoutes')
+const { getDepartments} = require('./routes/api/departmentRoutes')
+const {getRoles}= require('./routes/api/rolesRoutes')
 
 const questions = [   
     {
@@ -29,6 +30,9 @@ const initPrompt = async() => {
             case 'departments':       
                 getDepartments()
                 break;
+            case 'roles':
+                getRoles()  
+                break;  
             default:
                 break;
         }

@@ -31,7 +31,7 @@ const seedDepartment = async() => {
             id: dept.id,
             title: dept.title,
         }));
-        console.log('\nExtracted SEEDED Data:');
+        console.log('\nExtracted SEEDED department Data:');
         console.table(extractedData);
         
     }catch(err){
@@ -47,7 +47,7 @@ const getDepartments = async() => {
                 id: dept.id,
                 title: dept.title,
               }));
-              console.log('\nExtracted GET Data:');
+              console.log('\nExtracted GET department Data:');
               console.table(extractedData);
     }catch(err){
         console.error(err)
