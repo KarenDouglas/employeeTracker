@@ -1,6 +1,5 @@
 const Roles = require('../../models/Roles')
 
-
 const seedRoles = async() => {
 
     try{    
@@ -48,23 +47,23 @@ const seedRoles = async() => {
     
 }
 
-const getRoles = async() => {
-  try{
-      const rolesData = await Roles.findAll()
-      const extractedData = rolesData.map(r => ({
-        id: r.id,
-        title: r.title,
-        salary: r.salary,
-        department_id: r.department_id
-    }));
-            console.log('\nExtracted Get Role Data:');
-            console.table(extractedData);
-  }catch(err){
-      console.error(err)
-  }
-}
+// const getRoles = async() => {
+//   try{
+//       const rolesData = await Roles.findAll()
+//       const extractedData = rolesData.map(r => ({
+//         id: r.id,
+//         title: r.title,
+//         salary: r.salary,
+//         department_id: r.department_id
+//     }));
+//             console.log('\nExtracted Get Role Data:');
+//             console.table(extractedData);
+//   }catch(err){
+//       console.error(err)
+//   }
+//}
 
 module.exports = {
     seedRoles,
-    getRoles
+   // getRoles
 }

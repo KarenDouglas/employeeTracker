@@ -9,9 +9,9 @@ const {seedEmployees} = require('./routes/api/employeeRoutes')
 
 const seedFiles = async()=> {
     await sequelize.sync({ force:true})
-   // await seedDepartment()
+    await seedDepartment()
     await seedRoles()
-    //await seedEmployees()
+    await seedEmployees()
 
 }
 seedFiles()
