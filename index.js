@@ -1,6 +1,7 @@
 const inquirer = require('inquirer')
 const { getDepartments} = require('./routes/api/departmentRoutes')
 const {getRoles}= require('./routes/api/rolesRoutes')
+const {getEmployees} = require('./routes/api/employeeRoutes')
 
 const questions = [   
     {
@@ -32,7 +33,10 @@ const initPrompt = async() => {
                 break;
             case 'roles':
                 getRoles()  
-                break;  
+                break;
+            case 'employees':
+                getEmployees()
+                break;    
             default:
                 break;
         }

@@ -1,6 +1,4 @@
 const Roles = require('../../models/Roles')
-const Department = require('../../models/Department');
-const { JSON } = require('sequelize');
 
 const seedRoles = async() => {
 
