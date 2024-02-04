@@ -9,27 +9,27 @@ const seedRoles = async() => {
             {
                 title: 'HR Manager',
                 salary: 80000,
-                department_id: 1, // Replace with the actual department_id
+                department_id: 1, 
               },
               {
                 title: 'IT Specialist',
                 salary: 90000,
-                department_id: 2, // Replace with the actual department_id
+                department_id: 2, 
               },
               {
                 title: 'Financial Analyst',
                 salary: 85000,
-                department_id: 3, // Replace with the actual department_id
+                department_id: 3, 
               },
               {
                 title: 'Marketing Coordinator',
                 salary: 80000,
-                department_id: 4, // Replace with the actual department_id
+                department_id: 4, 
               },
               {
                 title: 'Operations Manager',
                 salary: 85000,
-                department_id: 5, // Replace with the actual department_id
+                department_id: 5, 
               },
         ])
         // extracts data for table in console 
