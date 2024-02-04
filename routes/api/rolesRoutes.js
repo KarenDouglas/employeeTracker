@@ -47,23 +47,35 @@ const seedRoles = async() => {
     
 }
 
-// const getRoles = async() => {
-//   try{
-//       const rolesData = await Roles.findAll()
-//       const extractedData = rolesData.map(r => ({
-//         id: r.id,
-//         title: r.title,
-//         salary: r.salary,
-//         department_id: r.department_id
-//     }));
-//             console.log('\nExtracted Get Role Data:');
-//             console.table(extractedData);
-//   }catch(err){
-//       console.error(err)
-//   }
-//}
+const getRoles = async() => {
+  try{
+      const rolesData = await Roles.findAll()
+      const extractedData = rolesData.map(r => ({
+        id: r.id,
+        title: r.title,
+        salary: r.salary,
+        department_id: r.department_id
+    }));
+            console.log('\nExtracted Get Role Data:');
+            console.table(extractedData);
+  }catch(err){
+      console.error(err)
+  }
+}
+
+
+const addRole = async(role,sal,dept) => {
+  const newRole = await Roles.create({
+    title: role,
+    salary:sal,
+    department_id:dept
+  })
+
+  return newRole
+}
 
 module.exports = {
     seedRoles,
-   // getRoles
+    getRoles,
+    addRole,
 }

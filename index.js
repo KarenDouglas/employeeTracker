@@ -1,8 +1,14 @@
 const inquirer = require('inquirer')
-const { getDepartments} = require('./routes/api/departmentRoutes')
-const {getRoles}= require('./routes/api/rolesRoutes')
-const {getEmployees} = require('./routes/api/employeeRoutes')
+const { getDepartments, selectDepartment} = require('./routes/api/departmentRoutes')
+const { getRoles , addRole, }= require('./routes/api/rolesRoutes')
+const { getEmployees} = require('./routes/api/employeeRoutes')
+ 
+const departmentSelections = async() => { 
+    const array = await selectDepartment()
+    return array
+}   
 
+departmentSelections()
 const questions = [   
     {
         type: 'list',
@@ -22,9 +28,21 @@ const questions = [
         name: 'newRole',
         message: 'Enter the new role:',
         when: (answers) => answers.options === 'addRole',
-      },  
+    },
+   {
+    name:"newSalary",
+    message:'Enter Salary',
+    when: (answers) => answers.options === 'addRole'
+   },
+   {
+    type: 'list',
+    name: 'department',
+    message: 'Choose from options',
+    choices: () => departmentSelections(),
+    when: (answers) => answers.options === 'addRole'
+   }
 ];
-const promptUser = () => {
+const promptUser = async() => {
     return inquirer.prompt(questions)
 }
 // takes in data from prompts 
@@ -32,18 +50,24 @@ const initPrompt = async() => {
  const answers= await promptUser() 
 
     if(answers){
-        const {options}  = answers
+        const {options, newRole, newSalary,department}  = answers
         switch (options) {
             case 'departments':       
-               await getDepartments()
-             await initPrompt()
-                break;
+                await getDepartments()
+                await initPrompt()
+                    break;
             case 'roles':
-                getRoles()  
-                break;
+                await getRoles()
+                await initPrompt()  
+                    break;
             case 'employees':
-                getEmployees()
-                break;    
+                await getEmployees()
+                await initPrompt()
+                    break;
+            case 'addRole':
+                await addRole(newRole, newSalary, department)
+                await initPrompt()
+                break;
             default:
                 break;
         }

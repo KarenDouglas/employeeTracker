@@ -53,7 +53,23 @@ const getDepartments = async() => {
         console.error(err)
     }
 }
+
+const selectDepartment = async() =>{
+    try {
+        const departmentData = await Department.findAll()
+        const extractedData = departmentData.map(dept => ({
+            name: dept.title,
+            value: dept.id
+          }));
+          
+   return extractedData
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+}
 module.exports = {
     seedDepartment,
-    getDepartments
+    getDepartments,
+    selectDepartment
 }
