@@ -1,5 +1,6 @@
 const Roles = require('../../models/Roles')
 
+
 const seedRoles = async() => {
 
     try{    

@@ -16,7 +16,13 @@ const questions = [
             { name: "add and employee", value: "addEmployee" },
             { name: "add an employee role", value: "addEmployeeRole" }
         ]
-    }    
+    },  
+    {
+        type: 'input',
+        name: 'newRole',
+        message: 'Enter the new role:',
+        when: (answers) => answers.options === 'addRole',
+      },  
 ];
 const promptUser = () => {
     return inquirer.prompt(questions)
@@ -29,7 +35,8 @@ const initPrompt = async() => {
         const {options}  = answers
         switch (options) {
             case 'departments':       
-                getDepartments()
+               await getDepartments()
+             await initPrompt()
                 break;
             case 'roles':
                 getRoles()  

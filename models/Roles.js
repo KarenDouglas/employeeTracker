@@ -9,6 +9,7 @@ Roles.init(
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
+            allowNull: false,
             validate: {
                 allowNull: false
             }
@@ -33,8 +34,9 @@ Roles.init(
     },
     {
         sequelize,
+        freezeTableName: true,
         modelName: 'roles'
     }
 );
 
-module.exports =Roles
+module.exports = Roles
