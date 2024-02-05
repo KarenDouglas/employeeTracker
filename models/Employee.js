@@ -9,21 +9,17 @@ Employee.init(
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            validate: {
-                allowNull: false
-            }
+            allowNull: false
+           
           },  
         first_name: {
             type: DataTypes.STRING,
-            validate: {
-                allowNull: false
-            }
+            allowNull: false
+            
         },
         last_name: {
             type: DataTypes.STRING,
-            validate: {
-                allowNull: false
-            }
+            allowNull: false
         },
         
         role_id: {

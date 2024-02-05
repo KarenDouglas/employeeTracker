@@ -75,6 +75,11 @@ const getEmployees = async () => {
                     model: Roles,
                     attributes: ['title'], // Include only the 'title' attribute from Roles
                 },
+                {
+                    model: Employee, // Include the Employee model for the manager
+                    as: 'manager',   // Alias for the manager relationship
+                    attributes: ['first_name'], // Include only the 'first_name' attribute
+                },
             ],
         });
 
@@ -83,6 +88,7 @@ const getEmployees = async () => {
             first_name: em.first_name,
             last_name: em.last_name,
             role: em.role.title, // Access the 'title' attribute of the associated role
+            manager: em.manager ? em.manager.first_name : null,
         }));
 
         console.log('\nExtracted Get Employee Data:');
@@ -92,18 +98,52 @@ const getEmployees = async () => {
     }
 };
 
-const addEmployee = async(first,last,rId) => {
-    const newEmployee = await Roles.create({
-      first_name: first,
-      last_name:last,
-      manager:rId
-    })
-  
-    return newEmployee
-  }
+const addEmployee = async (first, last, rId, mId) => {
+    try {
+        const newEmployee = await Employee.create({
+            first_name: first,
+            last_name: last,
+            role_id: rId,
+            manager_id: mId
+        });
 
+        console.info(`${newEmployee.first_name} ${newEmployee.last_name} was added to Employees table.`);
+    } catch (err) {
+        console.error(err);
+    }
+};
+const selectRole = async() =>{
+    try {
+        const roleData = await Roles.findAll()
+        const extractedData = roleData.map(dept => ({
+            name: dept.title,
+            value: dept.id
+          }));
+          
+   return extractedData
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+}
+const selectManager = async() =>{
+    try {
+        const managerData = await Employee.findAll()
+        const extractedData = managerData.map(em => ({
+            name: em.first_name,
+            value: em.id
+          }));
+          
+   return extractedData
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+}
 module.exports = {
     seedEmployees,
     getEmployees,
-    addEmployee
+    addEmployee,
+    selectRole,
+    selectManager
 }
