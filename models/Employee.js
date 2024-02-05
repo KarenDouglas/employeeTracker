@@ -34,6 +34,14 @@ Employee.init(
               onDelete: 'CASCADE',
             },
         },
+        manager_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Employee, 
+                key: 'id', 
+                onDelete: 'CASCADE',
+            },
+        }
     },
     {
         sequelize,
@@ -41,4 +49,6 @@ Employee.init(
     }
 );
 Employee.belongsTo(Role, { foreignKey: 'role_id' });
+Employee.belongsTo(Employee, { foreignKey: 'manager_id', as: 'manager' });
+Employee.hasMany(Employee, { foreignKey: 'manager_id', as: 'directReports' });
 module.exports =Employee

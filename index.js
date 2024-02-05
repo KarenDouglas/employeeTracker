@@ -1,14 +1,15 @@
 const inquirer = require('inquirer')
 const { getDepartments, selectDepartment} = require('./routes/api/departmentRoutes')
 const { getRoles , addRole, }= require('./routes/api/rolesRoutes')
-const { getEmployees} = require('./routes/api/employeeRoutes')
+const { getEmployees, addEmployee} = require('./routes/api/employeeRoutes')
  
+
 const departmentSelections = async() => { 
     const array = await selectDepartment()
     return array
 }   
 
-departmentSelections()
+
 const questions = [   
     {
         type: 'list',
