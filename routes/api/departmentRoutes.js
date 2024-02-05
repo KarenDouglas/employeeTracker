@@ -54,6 +54,11 @@ const getDepartments = async() => {
     }
 }
 
+const addDepartment = async(title) => {
+    const newDept = await Department.create({
+      title: title,
+    })
+}
 const selectDepartment = async() =>{
     try {
         const departmentData = await Department.findAll()
@@ -71,5 +76,6 @@ const selectDepartment = async() =>{
 module.exports = {
     seedDepartment,
     getDepartments,
-    selectDepartment
+    selectDepartment,
+    addDepartment
 }

@@ -9,15 +9,11 @@ Department.init(
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            validate: {
-                allowNull: false
-            }
+            allowNull: false
           },  
         title: {
             type: DataTypes.STRING,
-            validate: {
-                allowNull: false
-            }
+            allowNull: false
         }
     },
     {

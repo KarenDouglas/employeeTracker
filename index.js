@@ -1,9 +1,9 @@
 const inquirer = require('inquirer')
-const { getDepartments, selectDepartment} = require('./routes/api/departmentRoutes')
+const { getDepartments, selectDepartment, addDepartment} = require('./routes/api/departmentRoutes')
 const { getRoles , addRole, }= require('./routes/api/rolesRoutes')
 const { getEmployees, addEmployee,selectRole, selectManager} = require('./routes/api/employeeRoutes')
  
-
+addDepartment('Retention')
 const departmentSelections = async() => { 
     const array = await selectDepartment()
     return array
@@ -29,7 +29,7 @@ const questions = [
             { name: "view all departments", value: "departments" },
             { name: "add a role", value: "addRole" },
             { name: "add and employee", value: "addEmployee" },
-            { name: "add an employee role", value: "addEmployeeRole" }
+            { name: "add a department", value: "addDept" }
         ]
     },  
     {
@@ -76,6 +76,12 @@ const questions = [
         choices: () => managerSelections(),
         when: (answers) => answers.options === 'addEmployee'
     },
+    {
+        type: 'input',
+        name: 'newDept',
+        message: 'Enter the new Department title',
+        when: (answers) => answers.options === 'addDept',
+    },
 
 ];
 const promptUser = async() => {
@@ -86,7 +92,7 @@ const initPrompt = async() => {
  const answers= await promptUser() 
 
     if(answers){
-        const {options, newRole, newSalary,department, firstName,lastName, role, manager}  = answers
+        const {options, newRole, newSalary,department, firstName,lastName, role, manager,newDept}  = answers
         switch (options) {
             case 'departments':       
                 await getDepartments()
@@ -106,6 +112,10 @@ const initPrompt = async() => {
                 break;
             case 'addEmployee':
                 await addEmployee(firstName,lastName,role,manager)
+                await initPrompt()
+                break;
+            case 'addDept':
+                await addDepartment(newDept)
                 await initPrompt()
                 break;
             default:
