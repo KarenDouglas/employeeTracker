@@ -1,9 +1,11 @@
 const inquirer = require('inquirer')
 const { getDepartments, selectDepartment, addDepartment} = require('./routes/api/departmentRoutes')
 const { getRoles , addRole, }= require('./routes/api/rolesRoutes')
-const { getEmployees, addEmployee,selectRole, selectManager} = require('./routes/api/employeeRoutes')
+const { getEmployees, addEmployee,selectRole, selectManager, updateEmployeeRole, selectEmployee} = require('./routes/api/employeeRoutes')
  
-addDepartment('Retention')
+
+
+
 const departmentSelections = async() => { 
     const array = await selectDepartment()
     return array
@@ -16,7 +18,10 @@ const managerSelections = async() =>{
     const array = await selectManager()
     return array
 }  
-
+const employeeSelections = async() => {
+    const array = await selectEmployee()
+    return array
+}
 
 const questions = [   
     {
@@ -29,7 +34,8 @@ const questions = [
             { name: "view all departments", value: "departments" },
             { name: "add a role", value: "addRole" },
             { name: "add and employee", value: "addEmployee" },
-            { name: "add a department", value: "addDept" }
+            { name: "add a department", value: "addDept" },
+            { name: "update an employee role", value: "updateRole"}
         ]
     },  
     {
@@ -67,7 +73,7 @@ const questions = [
         name: 'role',
         message: 'Choose from options',
         choices: () => roleSelections(),
-        when: (answers) => answers.options === 'addEmployee'
+        when: (answers) => answers.options === 'addEmployee',
     },
     {
         type: 'list',
@@ -82,6 +88,20 @@ const questions = [
         message: 'Enter the new Department title',
         when: (answers) => answers.options === 'addDept',
     },
+    {
+        type: 'list',
+        name: 'employeeChoice',
+        message: 'Choose an Employee to update',
+        choices: () => employeeSelections(),
+        when: (answers) => answers.options === 'updateRole'
+    },
+    {
+        type: 'list',
+        name: 'updatedRole',
+        message: 'Select their new role',
+        choices: () => roleSelections(),
+        when: (answers) => answers.options === 'updateRole',
+    },
 
 ];
 const promptUser = async() => {
@@ -89,41 +109,46 @@ const promptUser = async() => {
 }
 // takes in data from prompts 
 const initPrompt = async() => {
- const answers= await promptUser() 
+    try {
+        const answers = await promptUser();
 
-    if(answers){
-        const {options, newRole, newSalary,department, firstName,lastName, role, manager,newDept}  = answers
-        switch (options) {
-            case 'departments':       
-                await getDepartments()
-                await initPrompt()
+        if (answers) {
+            const { options, newRole, newSalary, department, firstName, lastName, role, manager, newDept, employeeChoice, updatedRole,} = answers;
+
+            switch (options) {
+                case 'departments':
+                    await getDepartments();
                     break;
-            case 'roles':
-                await getRoles()
-                await initPrompt()  
+                case 'roles':
+                    await getRoles();
                     break;
-            case 'employees':
-                await getEmployees()
-                await initPrompt()
+                case 'employees':
+                    await getEmployees();
                     break;
-            case 'addRole':
-                await addRole(newRole, newSalary, department)
-                await initPrompt()
-                break;
-            case 'addEmployee':
-                await addEmployee(firstName,lastName,role,manager)
-                await initPrompt()
-                break;
-            case 'addDept':
-                await addDepartment(newDept)
-                await initPrompt()
-                break;
-            default:
-                break;
+                case 'addRole':
+                    await addRole(newRole, newSalary, department);
+                    break;
+                case 'addEmployee':
+                    await addEmployee(firstName, lastName, role, manager);
+                    break;
+                case 'addDept':
+                    await addDepartment(newDept);
+                    break;
+                case 'updateRole':
+                    await updateEmployeeRole(employeeChoice, updatedRole);
+                    break;
+                default:
+                    break;
+            }
+
+            await initPrompt(); // Move this line outside of the switch statement to ensure it's always called
         }
+    } catch (err) {
+        console.error(err);
     }
+};
 
-}
+
 
 initPrompt()
 

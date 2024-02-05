@@ -99,6 +99,7 @@ const getEmployees = async () => {
 };
 
 const addEmployee = async (first, last, rId, mId) => {
+        await   getEmployees()
     try {
         const newEmployee = await Employee.create({
             first_name: first,
@@ -140,10 +141,41 @@ const selectManager = async() =>{
         return [];
       }
 }
+const selectEmployee = async() =>{
+    try {
+        const employeeData = await Employee.findAll()
+        const extractedData = employeeData.map(em => ({
+            name: em.first_name,
+            value: em.id
+          }));
+          
+   return extractedData
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+}
+const updateEmployeeRole = async (oldId, newId) => {
+   const updatedRole =  await Employee.update(
+        {
+            role_id: newId,
+
+        },
+        {
+            where: {
+                role_id: oldId
+            }
+        }
+    )
+   console.log('updated', oldId,newId)
+   return
+}
 module.exports = {
     seedEmployees,
     getEmployees,
     addEmployee,
     selectRole,
-    selectManager
+    selectManager,
+  updateEmployeeRole,
+    selectEmployee
 }
