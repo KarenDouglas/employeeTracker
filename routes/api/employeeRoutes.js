@@ -1,5 +1,5 @@
 const Employee = require('../../models/Employee')
-
+const Roles = require('../../models/Roles')
 const seedEmployees = async() => {
 
     try{    
@@ -47,21 +47,30 @@ const seedEmployees = async() => {
     
 }
 
-const getEmployees = async() => {
-  try{
-      const employeeData = await Employee.findAll()
-      const extractedData = employeeData.map(em => ({
-        id: em.id,
-        first_name: em.first_name,
-        last_name: em.last_name,
-        role_id: em.role_id
-    }));
-            console.log('\nExtracted Get Employee Data:');
-            console.table(extractedData);
-  }catch(err){
-      console.error(err)
-  }
-}
+const getEmployees = async () => {
+    try {
+        const employeeData = await Employee.findAll({
+            include: [
+                {
+                    model: Roles,
+                    attributes: ['title'], // Include only the 'title' attribute from Roles
+                },
+            ],
+        });
+
+        const extractedData = employeeData.map(em => ({
+            id: em.id,
+            first_name: em.first_name,
+            last_name: em.last_name,
+            role: em.role.title, // Access the 'title' attribute of the associated role
+        }));
+
+        console.log('\nExtracted Get Employee Data:');
+        console.table(extractedData);
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 module.exports = {
     seedEmployees,

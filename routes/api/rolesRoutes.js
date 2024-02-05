@@ -1,5 +1,5 @@
 const Roles = require('../../models/Roles')
-
+const Department = require('../../models/Department')
 const seedRoles = async() => {
 
     try{    
@@ -32,12 +32,15 @@ const seedRoles = async() => {
               },
         ])
         // extracts data for table in console 
-        const extractedData = roles.map(r => ({
+
+        const extractedData = roles.map(r => (
+          {
             id: r.id,
             title: r.title,
             salary: r.salary,
-            department_id: r.department_id
-        }));
+            manager:r.department_id
+          }
+        ));
         console.log('\nExtracted SEEDED Role Data:');
         console.table(extractedData);
         
@@ -47,21 +50,6 @@ const seedRoles = async() => {
     
 }
 
-const getRoles = async() => {
-  try{
-      const rolesData = await Roles.findAll()
-      const extractedData = rolesData.map(r => ({
-        id: r.id,
-        title: r.title,
-        salary: r.salary,
-        department_id: r.department_id
-    }));
-            console.log('\nExtracted Get Role Data:');
-            console.table(extractedData);
-  }catch(err){
-      console.error(err)
-  }
-}
 
 
 const addRole = async(role,sal,dept) => {
@@ -73,6 +61,31 @@ const addRole = async(role,sal,dept) => {
 
   return newRole
 }
+const getRoles = async () => {
+  try {
+      const rolesData = await Roles.findAll({
+          include: [
+              {
+                  model: Department, // Assuming you have a Department model
+                  attributes: ['title'], // Fetch only the title attribute
+                  as: 'department', // Alias for the joined department table
+              },
+          ],
+      });
+
+      const extractedData = rolesData.map(r => ({
+          id: r.id,
+          title: r.title,
+          salary: r.salary,
+          department: r.department.title, 
+      }));
+
+      console.log('\nExtracted Get Role Data:');
+      console.table(extractedData);
+  } catch (err) {
+      console.error(err);
+  }
+};
 
 module.exports = {
     seedRoles,

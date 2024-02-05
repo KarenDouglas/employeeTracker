@@ -36,5 +36,5 @@ Roles.init(
         modelName: 'roles'
     }
 );
-
+Roles.belongsTo(Department, { foreignKey: 'department_id' });
 module.exports = Roles

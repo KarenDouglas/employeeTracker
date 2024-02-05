@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize'); // retrieve methods from sequelize
 const sequelize = require('../config/connections'); //
-const Role = require('./Roles')
+const Role = require('./Roles');
 class Employee extends Model{}
 
 Employee.init(
@@ -29,8 +29,8 @@ Employee.init(
         role_id: {
             type: DataTypes.INTEGER,
             references: {
-              model: Role, // Reference to the Department model
-              key: 'id', // The primary key in the Department model
+              model: Role, 
+              key: 'id', 
               onDelete: 'CASCADE',
             },
         },
@@ -40,5 +40,5 @@ Employee.init(
         modelName: 'employee'
     }
 );
-
+Employee.belongsTo(Role, { foreignKey: 'role_id' });
 module.exports =Employee
