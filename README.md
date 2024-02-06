@@ -9,8 +9,8 @@ I WANT to be able to view and manage the departments, roles, and employees in my
 SO THAT I can organize and plan my business
 ```
 
-# Video Sample
-
+## Video Sample
+click on video for full demonstration!
 [![Watch the video](./example/employeeTracker%20CLI%20-%20Made%20with%20Clipchamp.gif)](https://youtu.be/axKSFufL-Fg)
 
 
