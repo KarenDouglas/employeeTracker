@@ -11,7 +11,8 @@
     "sequelize": "^6.3.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server && node index"
   },
   "repository": {
     "type": "git",

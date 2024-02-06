@@ -9,6 +9,7 @@ if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   sequelize = new Sequelize(
+    //connect mysql database
     process.env.DB_DATABASE,
     process.env.DB_USER,
     process.env.DB_PASS,
@@ -19,6 +20,7 @@ if (process.env.JAWSDB_URL) {
     }
   );
 }
+// checks if sequelize is connected
 sequelize
   .authenticate()
   .then(() => {

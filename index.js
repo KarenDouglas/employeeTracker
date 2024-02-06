@@ -35,7 +35,8 @@ const questions = [
             { name: "add a role", value: "addRole" },
             { name: "add and employee", value: "addEmployee" },
             { name: "add a department", value: "addDept" },
-            { name: "update an employee role", value: "updateRole"}
+            { name: "update an employee role", value: "updateRole"},
+            { name: 'Exit', value: 'exit' }
         ]
     },  
     {
@@ -138,6 +139,7 @@ const initPrompt = async() => {
                     await updateEmployeeRole(employeeChoice, updatedRole);
                     break;
                 default:
+                    return
                     break;
             }
 

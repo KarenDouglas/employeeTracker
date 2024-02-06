@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require('sequelize'); // retrieve methods from sequelize
-const sequelize = require('../config/connections'); //
+const sequelize = require('../config/connections'); 
 const Department = require('./Department')
 class Roles extends Model{}
-
+//Describes  Role schema
 Roles.init(
     {  
         id: {
@@ -36,5 +36,6 @@ Roles.init(
         modelName: 'roles'
     }
 );
+//establishes connection between roles and Departments
 Roles.belongsTo(Department, { foreignKey: 'department_id' });
 module.exports = Roles

@@ -1,10 +1,36 @@
 # employeeTracker
+
+
 ## User Story
 
 ```md
 AS A business owner
 I WANT to be able to view and manage the departments, roles, and employees in my company
 SO THAT I can organize and plan my business
+```
+
+# Video Sample
+
+[![Watch the video](./example/employeeTracker%20CLI%20-%20Made%20with%20Clipchamp.gif)](https://youtu.be/axKSFufL-Fg)
+
+
+
+## Built With
+ - JavaScript
+ - Node.js
+ - Inquirer NPM package
+ - Sequelize
+ - MySQL
+
+ ## Instructions
+ 
+ To download node packages:
+```bash
+npm i
+```
+To start employee tracker and seed data:
+```bash
+npm run dev
 ```
 
 ## Acceptance Criteria
@@ -28,3 +54,12 @@ THEN I am prompted to enter the employee’s first name, last name, role, and ma
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 ```
+
+## Author
+
+- LinkedIn: [@KarenDouglas](https://www.linkedin.com/in/karen-douglas-344974246/)
+- Frontend Mentor: [@KarenDouglas](https://www.frontendmentor.io/profile/KarenDouglas)
+- Twitter: [@CodeNoob4Life](https://twitter.com/CodeNoob4Life)
+
+
+

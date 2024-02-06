@@ -1,8 +1,10 @@
 const { Model, DataTypes } = require('sequelize'); // retrieve methods from sequelize
-const sequelize = require('../config/connections'); //
+const sequelize = require('../config/connections'); // connect to my databse
 
+// uses Model class from sequelize
 class Department extends Model{}
 
+// describes Department schema
 Department.init(
     {  
         id: {

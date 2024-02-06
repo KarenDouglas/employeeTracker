@@ -1,5 +1,7 @@
 const Roles = require('../../models/Roles')
 const Department = require('../../models/Department')
+
+// creates multiple roles to db
 const seedRoles = async() => {
 
     try{    
@@ -51,7 +53,7 @@ const seedRoles = async() => {
 }
 
 
-
+// adds a new role to db
 const addRole = async(role,sal,dept) => {
   const newRole = await Roles.create({
     title: role,
@@ -61,6 +63,7 @@ const addRole = async(role,sal,dept) => {
 
   return newRole
 }
+// renders all roles to the console
 const getRoles = async () => {
   try {
       const rolesData = await Roles.findAll({

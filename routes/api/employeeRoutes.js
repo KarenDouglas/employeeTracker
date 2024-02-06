@@ -66,7 +66,7 @@ const seedEmployees = async() => {
     }
     
 }
-
+// renders all employees to the console
 const getEmployees = async () => {
     try {
         const employeeData = await Employee.findAll({
@@ -97,7 +97,7 @@ const getEmployees = async () => {
         console.error(err);
     }
 };
-
+// adds a new employee to db
 const addEmployee = async (first, last, rId, mId) => {
         await   getEmployees()
     try {
@@ -113,6 +113,7 @@ const addEmployee = async (first, last, rId, mId) => {
         console.error(err);
     }
 };
+// renders an array for selection choices for employee roles
 const selectRole = async() =>{
     try {
         const roleData = await Roles.findAll()
@@ -127,6 +128,7 @@ const selectRole = async() =>{
         return [];
       }
 }
+// renders an array for selection choices for employees
 const selectManager = async() =>{
     try {
         const managerData = await Employee.findAll()
@@ -141,6 +143,7 @@ const selectManager = async() =>{
         return [];
       }
 }
+// renders an array for selection choices for employees
 const selectEmployee = async() =>{
     try {
         const employeeData = await Employee.findAll()
@@ -155,6 +158,7 @@ const selectEmployee = async() =>{
         return [];
       }
 }
+// updates the role category for an employee
 const updateEmployeeRole = async (oldId, newId) => {
    const updatedRole =  await Employee.update(
         {

@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize'); // retrieve methods from sequ
 const sequelize = require('../config/connections'); //
 const Role = require('./Roles');
 class Employee extends Model{}
-
+// describes Employee Schema
 Employee.init(
     {  
         id: {
@@ -44,6 +44,7 @@ Employee.init(
         modelName: 'employee'
     }
 );
+// establishes relationship between employee and role model for reference key use
 Employee.belongsTo(Role, { foreignKey: 'role_id' });
 Employee.belongsTo(Employee, { foreignKey: 'manager_id', as: 'manager' });
 Employee.hasMany(Employee, { foreignKey: 'manager_id', as: 'directReports' });

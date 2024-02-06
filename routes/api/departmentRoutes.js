@@ -1,10 +1,5 @@
 const Department = require('../../models/Department')
 
-
-
-
-
-
 // creates multiple departments
 const seedDepartment = async() => {
     try{
@@ -39,7 +34,7 @@ const seedDepartment = async() => {
     }
     
 }
-
+// renders all departments to the console
 const getDepartments = async() => {
     try{
         const departmentData = await Department.findAll()
@@ -54,11 +49,15 @@ const getDepartments = async() => {
     }
 }
 
+// adds a new department to db
 const addDepartment = async(title) => {
     const newDept = await Department.create({
       title: title,
     })
+    return newDept
 }
+
+// renders an array for selection choices for department
 const selectDepartment = async() =>{
     try {
         const departmentData = await Department.findAll()
