@@ -11,6 +11,8 @@ SO THAT I can organize and plan my business
 
 ## Video Sample
 click on video for full demonstration!
+
+
 [![Watch the video](./example/employeeTracker%20CLI%20-%20Made%20with%20Clipchamp.gif)](https://youtu.be/axKSFufL-Fg)
 
 
